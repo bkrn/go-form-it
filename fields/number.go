@@ -29,6 +29,7 @@ func RangeField(name string, min, max, step int) *Field {
 // NumberField craetes a default number field with the provided name.
 func NumberField(name string) *Field {
 	ret := FieldWithType(name, formcommon.NUMBER)
+	ret.SetParam("step", string(step))
 	return ret
 }
 
@@ -44,6 +45,9 @@ func NumberFieldFromInstance(i interface{}, fieldNo int, name string) *Field {
 	}
 	if v := t.Get("form_max"); v != "" {
 		ret.SetParam("max", v)
+	}
+	if v := t.Get("form_step"); v != "" {
+		ret.SetParam("step", v)
 	}
 	if v := t.Get("form_value"); v != "" {
 		ret.SetValue(v)
