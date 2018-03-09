@@ -1,7 +1,7 @@
 Go-FORM-it
 ==========
 
-[![Build Status](https://travis-ci.org/kirves/go-form-it.png?branch=master)](https://travis-ci.org/kirves/go-form-it) [![GoDoc](https://godoc.org/github.com/kirves/go-form-it?status.png)](http://godoc.org/github.com/kirves/go-form-it)
+[![Build Status](https://travis-ci.org/bkrn/go-form-it.png?branch=master)](https://travis-ci.org/bkrn/go-form-it) [![GoDoc](https://godoc.org/github.com/bkrn/go-form-it?status.png)](http://godoc.org/github.com/bkrn/go-form-it)
 
 
 Description
@@ -25,7 +25,7 @@ Installation
 
 To install this package simply:
 
-	go get github.com/kirves/go-form-it
+	go get github.com/bkrn/go-form-it
 
 Forms
 =====
@@ -200,7 +200,7 @@ Fields
 ======
 
 Field objects in `go-form-it` implement the `fields.FieldInterface` which exposes methods to edit classes, parameters, tags and CSS styles.
-See the [documentation](http://godoc.org/github.com/kirves/go-form-it) for details.
+See the [documentation](http://godoc.org/github.com/bkrn/go-form-it) for details.
 
 Most of the field widgets have already been created and integrate with Bootstrap. It is possible, however, to define custom widgets to render fields by simply assigning an object implementing the widgets.WidgetInterface to the Widget field.
 
@@ -290,4 +290,4 @@ Buttons can be created calling either the `Button`, `SubmitButton` or `ResetButt
 License
 =======
 
-`go-form-it` is released under the MIT license. See [LICENSE](https://github.com/kirves/go-form-it/blob/master/LICENSE).
+`go-form-it` is released under the MIT license. See [LICENSE](https://github.com/bkrn/go-form-it/blob/master/LICENSE).

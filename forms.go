@@ -5,11 +5,12 @@
 package forms
 
 import (
-	"github.com/kirves/go-form-it/common"
-	"github.com/kirves/go-form-it/fields"
 	"html/template"
 	"reflect"
 	"strings"
+
+	"github.com/bkrn/go-form-it/common"
+	"github.com/bkrn/go-form-it/fields"
 )
 
 // Form methods: POST or GET.
@@ -20,7 +21,7 @@ const (
 
 // Form structure.
 type Form struct {
-	fields       []FormElement
+	Fields       []FormElement
 	fieldMap     map[string]int
 	containerMap map[string]string
 	style        string
@@ -121,6 +122,8 @@ func unWindStructure(m interface{}, baseName string) []fields.FieldInterface {
 				fName = strings.Join([]string{baseName, t.Field(i).Name}, ".")
 			}
 			switch widget {
+			case "hidden":
+				f = fields.HiddenFieldFromInstance(m, i, fName)
 			case "text":
 				f = fields.TextFieldFromInstance(m, i, fName)
 			case "textarea":
@@ -144,7 +147,7 @@ func unWindStructure(m interface{}, baseName string) []fields.FieldInterface {
 			case "static":
 				f = fields.StaticFieldFromInstance(m, i, fName)
 			default:
-				switch t.Field(i).Type.String() {
+				switch t.Field(i).Type.Kind().String() {
 				case "string":
 					f = fields.TextFieldFromInstance(m, i, fName)
 				case "bool":
@@ -164,7 +167,9 @@ func unWindStructure(m interface{}, baseName string) []fields.FieldInterface {
 			}
 			if f != nil {
 				label := t.Field(i).Tag.Get("form_label")
-				if label != "" {
+				if label == "none" {
+
+				} else if label != "" {
 					f.SetLabel(label)
 				} else {
 					f.SetLabel(strings.Title(t.Field(i).Name))

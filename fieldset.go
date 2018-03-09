@@ -2,9 +2,10 @@ package forms
 
 import (
 	"bytes"
-	"github.com/kirves/go-form-it/common"
-	"github.com/kirves/go-form-it/fields"
 	"html/template"
+
+	"github.com/bkrn/go-form-it/common"
+	"github.com/bkrn/go-form-it/fields"
 )
 
 // FieldSetType is a collection of fields grouped within a form.

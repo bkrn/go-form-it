@@ -2,8 +2,9 @@ package fields
 
 import (
 	"fmt"
-	"github.com/kirves/go-form-it/common"
 	"reflect"
+
+	"github.com/bkrn/go-form-it/common"
 )
 
 // // Number field type.
@@ -29,7 +30,7 @@ func RangeField(name string, min, max, step int) *Field {
 // NumberField craetes a default number field with the provided name.
 func NumberField(name string) *Field {
 	ret := FieldWithType(name, formcommon.NUMBER)
-	ret.SetParam("step", string(step))
+	//ret.SetParam("step", string(step))
 	return ret
 }
 

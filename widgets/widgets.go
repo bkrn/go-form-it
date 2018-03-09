@@ -6,8 +6,9 @@ package widgets
 import (
 	"bytes"
 	"fmt"
-	"github.com/kirves/go-form-it/common"
 	"html/template"
+
+	"github.com/bkrn/go-form-it/common"
 )
 
 // Simple widget object that gets executed at render time.

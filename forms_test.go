@@ -1,10 +1,11 @@
 package forms
 
 import (
-	"github.com/kirves/go-form-it/common"
-	"github.com/kirves/go-form-it/fields"
 	"testing"
 	"time"
+
+	"github.com/bkrn/go-form-it/common"
+	"github.com/bkrn/go-form-it/fields"
 )
 
 const (

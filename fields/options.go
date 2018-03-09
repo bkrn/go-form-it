@@ -2,9 +2,10 @@ package fields
 
 import (
 	"fmt"
-	"github.com/kirves/go-form-it/common"
 	"reflect"
 	"strings"
+
+	"github.com/bkrn/go-form-it/common"
 )
 
 // Id - Value pair used to define an option for select and redio input fields.

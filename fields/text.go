@@ -2,9 +2,10 @@ package fields
 
 import (
 	"fmt"
-	"github.com/kirves/go-form-it/common"
 	"reflect"
 	"strconv"
+
+	"github.com/bkrn/go-form-it/common"
 )
 
 // // Text field input type.

@@ -2,9 +2,10 @@ package forms
 
 import (
 	"bytes"
-	"github.com/kirves/go-form-it/fields"
 	"html/template"
 	"reflect"
+
+	"github.com/bkrn/go-form-it/fields"
 )
 
 // FormElement interface defines a form object (usually a Field or a FieldSet) that can be rendered as a template.HTML object.
@@ -18,7 +19,7 @@ func (f *Form) Render() template.HTML {
 	var s string
 	buf := bytes.NewBufferString(s)
 	data := map[string]interface{}{
-		"fields":  f.fields,
+		"fields":  f.Fields,
 		"classes": f.class,
 		"id":      f.id,
 		"params":  f.params,
@@ -49,8 +50,8 @@ func (f *Form) Elements(elems ...FormElement) *Form {
 
 func (f *Form) addField(field fields.FieldInterface) *Form {
 	field.SetStyle(f.style)
-	f.fields = append(f.fields, field)
-	f.fieldMap[field.Name()] = len(f.fields) - 1
+	f.Fields = append(f.Fields, field)
+	f.fieldMap[field.Name()] = len(f.Fields) - 1
 	return f
 }
 
@@ -59,8 +60,8 @@ func (f *Form) addFieldSet(fs *FieldSetType) *Form {
 		v.SetStyle(f.style)
 		f.containerMap[v.Name()] = fs.name
 	}
-	f.fields = append(f.fields, fs)
-	f.fieldMap[fs.Name()] = len(f.fields) - 1
+	f.Fields = append(f.Fields, fs)
+	f.fieldMap[fs.Name()] = len(f.Fields) - 1
 	return f
 }
 
@@ -71,7 +72,7 @@ func (f *Form) RemoveElement(name string) *Form {
 		return f
 	}
 	delete(f.fieldMap, name)
-	f.fields = append(f.fields[:ind], f.fields[ind+1:]...)
+	f.Fields = append(f.Fields[:ind], f.Fields[ind+1:]...)
 	return f
 }
 
@@ -130,20 +131,20 @@ func (f *Form) RemoveCss(key string) *Form {
 // Field returns the field identified by name. It returns an empty field if it is missing.
 func (f *Form) Field(name string) fields.FieldInterface {
 	ind, ok := f.fieldMap[name]
-	if !ok || !reflect.TypeOf(f.fields[ind]).Implements(reflect.TypeOf((*fields.FieldInterface)(nil)).Elem()) {
+	if !ok || !reflect.TypeOf(f.Fields[ind]).Implements(reflect.TypeOf((*fields.FieldInterface)(nil)).Elem()) {
 		if v, ok2 := f.containerMap[name]; ok2 {
 			return f.FieldSet(v).Field(name)
 		}
 		return &fields.Field{}
 	}
-	return f.fields[ind].(fields.FieldInterface)
+	return f.Fields[ind].(fields.FieldInterface)
 }
 
 // Field returns the field identified by name. It returns an empty field if it is missing.
 func (f *Form) FieldSet(name string) *FieldSetType {
 	ind, ok := f.fieldMap[name]
-	if !ok || reflect.ValueOf(f.fields[ind]).Type().String() != "*forms.FieldSetType" {
+	if !ok || reflect.ValueOf(f.Fields[ind]).Type().String() != "*forms.FieldSetType" {
 		return &FieldSetType{}
 	}
-	return f.fields[ind].(*FieldSetType)
+	return f.Fields[ind].(*FieldSetType)
 }
