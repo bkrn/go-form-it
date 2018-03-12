@@ -48,7 +48,7 @@ const (
 )
 
 //TEMPLATE_PATH ovrerides the auto template
-const TEMPLATE_PATH = ""
+var TEMPLATE_PATH = ""
 
 // CreateUrl creates the complete url of the desired widget template
 func CreateUrl(widget string) string {
