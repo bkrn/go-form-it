@@ -47,8 +47,14 @@ const (
 	BOOTSTRAP = "bootstrap3"
 )
 
+//TEMPLATE_PATH ovrerides the auto template
+const TEMPLATE_PATH = ""
+
 // CreateUrl creates the complete url of the desired widget template
 func CreateUrl(widget string) string {
+	if TEMPLATE_PATH != "" {
+		return path.Join(TEMPLATE_PATH, widget)
+	}
 	if _, err := os.Stat(widget); os.IsNotExist(err) {
 		goPath := os.Getenv("GOPATH")
 		// In some cases ( using godep ) , GOPATH is something like this /path/to/godep/workspace:/original/go/path
