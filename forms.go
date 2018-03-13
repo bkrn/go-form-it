@@ -41,7 +41,7 @@ func BaseForm(method, action string) *Form {
 		panic(err)
 	}
 	tmpl.Funcs(
-		map[string]interface{}{
+		template.FuncMap{
 			"even": func(ix int) bool {
 				return ix%2 == 0
 			},
@@ -69,7 +69,7 @@ func BootstrapForm(method, action string) *Form {
 		panic(err)
 	}
 	tmpl.Funcs(
-		map[string]interface{}{
+		template.FuncMap{
 			"even": func(ix int) bool {
 				return ix%2 == 0
 			},
