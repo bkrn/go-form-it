@@ -6,6 +6,7 @@ package forms
 
 import (
 	"html/template"
+	"path"
 	"reflect"
 	"strings"
 
@@ -35,7 +36,7 @@ type Form struct {
 }
 
 func getTemplate(nm string) *template.Template {
-	return template.New(nm).Funcs(
+	return template.New(path.Base(nm)).Funcs(
 		template.FuncMap{
 			"even": func(ix int) bool {
 				return ix%2 == 0
