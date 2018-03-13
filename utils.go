@@ -27,13 +27,6 @@ func (f *Form) Render() template.HTML {
 		"method":  f.method,
 		"action":  f.action,
 	}
-	f.template.Funcs(
-		template.FuncMap{
-			"even": func(ix int) bool {
-				return ix%2 == 0
-			},
-		},
-	)
 	err := f.template.Execute(buf, data)
 	if err != nil {
 		panic(err)

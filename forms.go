@@ -34,9 +34,19 @@ type Form struct {
 	action       template.HTML
 }
 
+func getTemplate() *template.Template {
+	return template.New("").Funcs(
+		template.FuncMap{
+			"even": func(ix int) bool {
+				return ix%2 == 0
+			},
+		},
+	)
+}
+
 // BaseForm creates an empty form with no styling.
 func BaseForm(method, action string) *Form {
-	tmpl, err := template.ParseFiles(formcommon.CreateUrl("templates/baseform.html"))
+	tmpl, err := getTemplate().ParseFiles(formcommon.CreateUrl("templates/baseform.html"))
 	if err != nil {
 		panic(err)
 	}
@@ -57,7 +67,7 @@ func BaseForm(method, action string) *Form {
 
 // BootstrapForm creates an empty form compliant with Bootstrap3 CSS, both in structure and classes.
 func BootstrapForm(method, action string) *Form {
-	tmpl, err := template.ParseFiles(formcommon.CreateUrl("templates/baseform.html"))
+	tmpl, err := getTemplate().ParseFiles(formcommon.CreateUrl("templates/baseform.html"))
 	if err != nil {
 		panic(err)
 	}
