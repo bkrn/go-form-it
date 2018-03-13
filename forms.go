@@ -38,8 +38,18 @@ type Form struct {
 func getTemplate(nm string) *template.Template {
 	return template.New(path.Base(nm)).Funcs(
 		template.FuncMap{
-			"even": func(ix int) bool {
-				return ix%2 == 0
+			"even": func(ix int, fes []FormElement) bool {
+				var cnt int
+				for fix, fe := range fes {
+					if fix > ix {
+						break
+					}
+					fi, is := fe.(*fields.Field)
+					if is && fi.Type() != "hidden" {
+						cnt++
+					}
+				}
+				return cnt%2 == 0
 			},
 			"lastIsOdd": func(ix int, fes []FormElement) bool {
 				var cnt int
