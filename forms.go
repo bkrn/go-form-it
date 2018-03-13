@@ -51,6 +51,12 @@ func getTemplate(nm string) *template.Template {
 				}
 				return (len(fes)-ix) == 1 && cnt%2 == 0
 			},
+			"elemType": func(fe FormElement) string {
+				if fi, is := fe.(*fields.Field); is {
+					return fi.Type()
+				}
+				return ""
+			},
 		},
 	)
 }
