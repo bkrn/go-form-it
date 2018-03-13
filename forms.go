@@ -40,6 +40,13 @@ func BaseForm(method, action string) *Form {
 	if err != nil {
 		panic(err)
 	}
+	tmpl.Funcs(
+		map[string]interface{}{
+			"even": func(ix int) bool {
+				return ix%2 == 0
+			},
+		},
+	)
 	return &Form{
 		make([]FormElement, 0),
 		make(map[string]int),
@@ -58,6 +65,9 @@ func BaseForm(method, action string) *Form {
 // BootstrapForm creates an empty form compliant with Bootstrap3 CSS, both in structure and classes.
 func BootstrapForm(method, action string) *Form {
 	tmpl, err := template.ParseFiles(formcommon.CreateUrl("templates/baseform.html"))
+	if err != nil {
+		panic(err)
+	}
 	tmpl.Funcs(
 		map[string]interface{}{
 			"even": func(ix int) bool {
@@ -65,9 +75,6 @@ func BootstrapForm(method, action string) *Form {
 			},
 		},
 	)
-	if err != nil {
-		panic(err)
-	}
 	return &Form{
 		make([]FormElement, 0),
 		make(map[string]int),
