@@ -41,6 +41,9 @@ func getTemplate(nm string) *template.Template {
 			"even": func(ix int) bool {
 				return ix%2 == 0
 			},
+			"lastIsOdd": func(ix, ln int) bool {
+				return ix%2 != 0 && (ln-ix) == 1
+			},
 		},
 	)
 }
