@@ -5,7 +5,6 @@
 package forms
 
 import (
-	"fmt"
 	"html/template"
 	"path"
 	"reflect"
@@ -43,8 +42,7 @@ func getTemplate(nm string) *template.Template {
 				return ix%2 == 0
 			},
 			"lastIsOdd": func(ix, ln int) bool {
-				fmt.Println(ix, ln, ix%2 != 0 && (ln-ix) == 1)
-				return ix%2 != 0 && (ln-ix) == 1
+				return ix%2 == 0 && (ln-ix) == 1
 			},
 		},
 	)
