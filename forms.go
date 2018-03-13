@@ -41,8 +41,15 @@ func getTemplate(nm string) *template.Template {
 			"even": func(ix int) bool {
 				return ix%2 == 0
 			},
-			"lastIsOdd": func(ix, ln int) bool {
-				return ix%2 == 0 && (ln-ix) == 1
+			"lastIsOdd": func(ix int, fes []FormElement) bool {
+				var cnt int
+				for _, fe := range fes {
+					fi, is := fe.(*fields.Field)
+					if is && fi.Type() != "hidden" {
+						cnt++
+					}
+				}
+				return (len(fes)-ix) == 1 && cnt%2 == 0
 			},
 		},
 	)

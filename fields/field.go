@@ -30,6 +30,7 @@ type Field struct {
 // FieldInterface defines the interface an object must implement to be used in a form. Every method returns a FieldInterface object
 // to allow methods chaining.
 type FieldInterface interface {
+	Type() string
 	Name() string
 	Render() template.HTML
 	AddClass(class string) FieldInterface
@@ -83,6 +84,11 @@ func FieldWithType(name, t string) *Field {
 func (f *Field) SetStyle(style string) FieldInterface {
 	f.Widget = widgets.BaseWidget(style, f.fieldType)
 	return f
+}
+
+// Type returns the type of the field.
+func (f *Field) Type() string {
+	return f.fieldType
 }
 
 // Name returns the name of the field.
