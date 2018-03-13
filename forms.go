@@ -49,7 +49,7 @@ func getTemplate(nm string) *template.Template {
 						cnt++
 					}
 				}
-				return cnt%2 == 0
+				return cnt%2 != 0
 			},
 			"lastIsOdd": func(ix int, fes []FormElement) bool {
 				var cnt int
